@@ -1,3 +1,9 @@
+# Angel Hill
+# Info 201
+# 2/20/2024
+# I utilized this stack overflow page to help me create income brackets.
+#https://stackoverflow.com/questions/12979456/categorize-numeric-variable-into-group-bins-breaks
+
 library(dplyr)
 library("stringr")
 library(ggplot2)
@@ -21,10 +27,6 @@ seattle_transport_df$GEOID <- as.character(seattle_transport_df$GEOID)
 seattle_zipcode_df$GEOID <- paste0("1400000US", seattle_zipcode_df$GEOID)
 
 seattle_income_df$median_income <- apply(seattle_income_df, 1, median, na.rm = TRUE)
-
-geoid_median_income <- seattle_income_df %>%
-  group_by(GEOID) %>%
-  summarize(total_median_income = median(median_income, na.rm = TRUE), .groups = "drop")
 
 seattle_income_df <- seattle_income_df %>%
   select(GEOID, contains("median_income"))
