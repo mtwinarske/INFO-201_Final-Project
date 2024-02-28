@@ -32,7 +32,7 @@ seattle_income_df <- seattle_income_df %>%
   select(GEOID, contains("median_income"))
 
 # Joining first two data sets.
-IncomeTransit <- full_join(seattle_income_df, seattle_zipcode_df, by = "GEOID")
+IncomeTransit <- left_join(seattle_income_df, seattle_zipcode_df, by = "GEOID")
 
 
 # Transit centers by zipcode
@@ -53,7 +53,7 @@ IncomeTransit <- IncomeTransit %>%
 IncomeTransit <- IncomeTransit %>%
   filter(!is.na(median_income))
 
-IncomeTransit <- full_join(IncomeTransit, seattle_transport_df, by = "GEOID")
+IncomeTransit <- left_join(IncomeTransit, seattle_transport_df, by = "GEOID")
 
 IncomeTransit <- IncomeTransit %>% distinct(GEOID, .keep_all = TRUE)
 
