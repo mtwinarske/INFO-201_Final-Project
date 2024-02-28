@@ -2,29 +2,50 @@
 
 ## OVERVIEW TAB INFO
 
-overview_tab <- tabPanel("Overview Tab Title",
-   h1("Some title"),
+overview_tab <- tabPanel("Overview",
+   h1(""),
    p("some explanation")
 )
 
-## VIZ 1 TAB INFO
+
+
+## VIZ 1 TAB - Miles W.
+## “How does geographical proximity to public transportation affect overall ridership?”
+
+######################################################
+################ Left-hand-Sidebar ###################
+######################################################
 
 viz_1_sidebar <- sidebarPanel(
-  h2("Options for graph"),
-  #TODO: Put inputs for modifying graph here
+  h2(""),
+  radioButtons("radio", label = h3("Transit Center Presence in GEOIDs"),
+               choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3), 
+               selected = 1),
+  
+  hr(),
+  fluidRow(column(3, verbatimTextOutput("value")))
+  
 )
 
+######################################################
+################### Title-Panel ######################
+######################################################
 viz_1_main_panel <- mainPanel(
-  h2("Vizualization 1 Title"),
+  h2("How does access to public transportation affect overall ridership?"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
-viz_1_tab <- tabPanel("Viz 1 tab title",
+viz_1_tab <- tabPanel("Relationship between Transit Centers & KCM Ridership",
   sidebarLayout(
     viz_1_sidebar,
     viz_1_main_panel
   )
 )
+
+######################################################
+################### Map-Panel ########################
+######################################################
+
 
 ## VIZ 2 TAB INFO
 
@@ -66,14 +87,14 @@ viz_3_tab <- tabPanel("Viz 3 tab title",
 
 ## CONCLUSIONS TAB INFO
 
-conclusion_tab <- tabPanel("Conclusion Tab Title",
+conclusion_tab <- tabPanel("Project Findings",
  h1("Some title"),
  p("some conclusions")
 )
 
 
 
-ui <- navbarPage("Example Project Title",
+ui <- navbarPage("Equity in Transportation",
   overview_tab,
   viz_1_tab,
   viz_2_tab,

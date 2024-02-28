@@ -1,6 +1,10 @@
 
 server <- function(input, output){
   
-  # TODO Make outputs based on the UI inputs here
   
+    # You can access the values of the widget (as a vector)
+    # with input$radio, e.g.
+    output$value <- renderPrint({ input$radio })
+    
+    
 }
