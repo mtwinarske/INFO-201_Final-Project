@@ -1,40 +1,43 @@
+library(shinythemes)
 
-
-## OVERVIEW TAB INFO
-
+######################################################
+################### Overview-Tab #####################
+######################################################
 overview_tab <- tabPanel("Overview",
-   h1(""),
-   p("some explanation")
+   h2("An Observational Analysis of Equity in KCM System", align = "center"),
+   h4("Angel Hill, Rose Garly, and Miles Winarske", align = "center"),
+   br(),
+   h4("What questions are we seeking to answer?"),
+   p("How does geographical proximity to public transportation affect overall ridership?"),
+   p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
+   p("How do income & poverty impact usage?"),
+   
 )
 
-
-
-## VIZ 1 TAB - Miles W.
-## “How does geographical proximity to public transportation affect overall ridership?”
-
 ######################################################
-################ Left-hand-Sidebar ###################
+#################### VIZ-1-Tab #######################
 ######################################################
 
+# Sidebar for Viz 1 #
 viz_1_sidebar <- sidebarPanel(
-  h2(""),
-  radioButtons("radio", label = h3("Transit Center Presence in GEOIDs"),
+  
+  h3("Map Options:"),
+  radioButtons("radio", label = strong("Transit Center Presence in GEOIDs"),
                choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
   
   hr(),
   fluidRow(column(3, verbatimTextOutput("value"))),
-  p("The presence of Transit centers looks to have a massive change toward ridership numbers.")
+  
   
 )
 
-######################################################
-################### Main-Panel #######################
-######################################################
+# Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("How does access to public transportation affect overall ridership?"),
+  h2("KCM Ridership by GEOID in King County, WA", align = "center"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
+# Tab label and Format of Viz 1 #
 viz_1_tab <- tabPanel("Transit Centers & KCM Ridership",
   sidebarLayout(
     viz_1_sidebar,
@@ -42,7 +45,9 @@ viz_1_tab <- tabPanel("Transit Centers & KCM Ridership",
   )
 )
 
-## VIZ 2 TAB INFO
+######################################################
+#################### VIZ-2-Tab #######################
+######################################################
 
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
@@ -83,7 +88,7 @@ viz_3_tab <- tabPanel("Viz 3 tab title",
 ## CONCLUSIONS TAB INFO
 
 conclusion_tab <- tabPanel("Project Findings",
- h1("Some title"),
+ h1("What did we learn?"),
  p("some conclusions")
 )
 
