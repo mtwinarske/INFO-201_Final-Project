@@ -19,33 +19,28 @@ overview_tab <- tabPanel("Overview",
 viz_1_sidebar <- sidebarPanel(
   h2(""),
   radioButtons("radio", label = h3("Transit Center Presence in GEOIDs"),
-               choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3), 
-               selected = 1),
+               choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
   
   hr(),
-  fluidRow(column(3, verbatimTextOutput("value")))
+  fluidRow(column(3, verbatimTextOutput("value"))),
+  p("The presence of Transit centers looks to have a massive change toward ridership numbers.")
   
 )
 
 ######################################################
-################### Title-Panel ######################
+################### Main-Panel #######################
 ######################################################
 viz_1_main_panel <- mainPanel(
   h2("How does access to public transportation affect overall ridership?"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
-viz_1_tab <- tabPanel("Relationship between Transit Centers & KCM Ridership",
+viz_1_tab <- tabPanel("Transit Centers & KCM Ridership",
   sidebarLayout(
     viz_1_sidebar,
     viz_1_main_panel
   )
 )
-
-######################################################
-################### Map-Panel ########################
-######################################################
-
 
 ## VIZ 2 TAB INFO
 
