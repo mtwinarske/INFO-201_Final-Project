@@ -1,18 +1,62 @@
+library(shiny)
 library(shinythemes)
 
 ######################################################
 ################### Overview-Tab #####################
 ######################################################
-overview_tab <- tabPanel("Overview",
-   h2("An Observational Analysis of Equity in KCM System", align = "center"),
-   h4("Angel Hill, Rose Garly, and Miles Winarske", align = "center"),
-   br(),
-   h4("What questions are we seeking to answer?"),
-   p("How does geographical proximity to public transportation affect overall ridership?"),
-   p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
-   p("How do income & poverty impact usage?"),
-   
+overview_sidebar <- sidebarPanel(
+          
+# Research Questions
+                                 h4("Research Questions:"),
+                                 p("How does geographical proximity to public transportation affect overall ridership?"),
+                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
+                                 p("How do income & poverty impact usage?"),
+                                 br(),
+# Data used and Sources
+                                 h4("Data used & Sources:"),
+                                 strong("Datasets:"),
+                                 p("Means of Transport to Work", 
+                                   a("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000")),
+                                 p("Median Income in the Past 12 Months",
+                                   a("https://data.census.gov/table/ACSST5Y2022.S1903?g=050XX00US53033$1400000")),
+                                 p("Equivalencing ZIP Code and Census Tract Geographies",a("https://proximityone.com/ziptractequiv.htm")),
+                                 strong("Supplemental refererences:"),
+                                 p("Income Bracket Reference",
+                                   a("https://www.bls.gov/news.release/wkyeng.nr0.htm")),
+                                 p("King County Transit Center Zipcodes",
+                                   a("https://kingcounty.gov/en/dept/metro/routes-and-service/schedules-and-maps")),
+                                 p("Income Bracket Calculation Help",
+                                   a("https://stackoverflow.com/questions/12979456/categorize-numeric-variable-into-group-bins-breaks")),
+                                 br(),
+# Data Collection & Ethical Implications
+                                 h4("Data Collection & Ethical Implications:"),
+                                 p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                                   nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                   deserunt mollit anim id est laborum."),
+                                 
+                                 
+  
 )
+
+overview_main_panel <- mainPanel(
+   h2("An Observational Analysis of Equity in the KCM System"),
+   h4("Angel Hill, Rose Garly, & Miles Winarske"),
+   br(),
+   img(src = "KCM-New_Flyer.jpg", height = 650, width = 1000)
+)
+overview_tab <- tabPanel("Overview",
+                         fluidPage(
+                           theme = shinytheme("sandstone"),
+                         ),
+                      sidebarLayout(
+                        overview_sidebar,
+                        overview_main_panel
+                        )
+)
+
 
 ######################################################
 #################### VIZ-1-Tab #######################
@@ -20,25 +64,22 @@ overview_tab <- tabPanel("Overview",
 
 # Sidebar for Viz 1 #
 viz_1_sidebar <- sidebarPanel(
-  
-  h3("Map Options:"),
-  radioButtons("radio", label = strong("Transit Center Presence in GEOIDs"),
-               choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
-  
-  hr(),
-  fluidRow(column(3, verbatimTextOutput("value"))),
+                              h3("Map Options:"),
+                              radioButtons("radio", label = strong("Transit Center Presence in GEOIDs"),
+                                           choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
+                              hr(),
   
   
 )
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("KCM Ridership by GEOID in King County, WA", align = "center"),
+  h2("KCM Ridership by GEOID in King County, WA"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
 # Tab label and Format of Viz 1 #
-viz_1_tab <- tabPanel("Transit Centers & KCM Ridership",
+viz_1_tab <- tabPanel("Geography & Ridership",
   sidebarLayout(
     viz_1_sidebar,
     viz_1_main_panel
@@ -59,7 +100,7 @@ viz_2_main_panel <- mainPanel(
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
-viz_2_tab <- tabPanel("Viz 2 tab title",
+viz_2_tab <- tabPanel("Economics & Ridership",
   sidebarLayout(
     viz_2_sidebar,
     viz_2_main_panel
@@ -78,7 +119,7 @@ viz_3_main_panel <- mainPanel(
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
-viz_3_tab <- tabPanel("Viz 3 tab title",
+viz_3_tab <- tabPanel("Mode availability & Mode Choice",
   sidebarLayout(
     viz_3_sidebar,
     viz_3_main_panel

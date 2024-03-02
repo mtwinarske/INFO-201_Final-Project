@@ -1,19 +1,27 @@
+# Load required libraries
 library(ggplot2)
-library(plotly)
-library(tidyverse)
+library(sf)
+library(dplyr)
+library(maps)
+library(mapproj)
 
+options(scipen = 999)
 
+mydata <- read.csv("IncomeTransitAlt.csv")
 map_df <- read.csv("ShapeDataKingCounty.csv")
-map_df$GEOID <- paste0("1400000US", map_df$GEOID)
+TransitCenterLocations <- read.csv("TransitCenterLocations.csv")
 
-map_KC <- ggplot(data = map_df) +
-  geom_polygon(mapping = aes(x = LON,
-                             Y = LAT,
-                             Group = GEOID
-                               )) + 
-  # adding in Transit Center Locations
-  geom_point(aes(x = LON,
-                 y = LAT,
-                 
-                    ))
-plot(map_KC)
+ggplot(data = map_df) +
+  
+  geom_polygon(aes(x = Long,
+                   y = Lat,
+                   group = Group,
+                   fill = "red")) +
+  # Transit Center Locations
+  geom_point(data = TransitCenterLocations) +
+aes(x = Long,
+    y = Lat,
+    group = Group,
+    color = "yellow") +
+  
+  coord_map()
