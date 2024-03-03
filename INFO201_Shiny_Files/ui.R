@@ -43,7 +43,9 @@ overview_main_panel <- mainPanel(
    h2("An Observational Analysis of Equity in the KCM System"),
    h4("Angel Hill, Rose Garly, & Miles Winarske"),
    br(),
-   img(src = "KCM-New_Flyer.jpg", height = 650, width = 1000)
+   img(src = "KCM-New_Flyer.jpg", height = 650, width = 1000),
+   h6("Image Source:",
+     a("https://www.flickr.com/photos/brasegaliwa/12870751595/"))
 )
 overview_tab <- tabPanel("Overview",
                          fluidPage(
@@ -72,7 +74,7 @@ viz_1_sidebar <- sidebarPanel(
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("KCM Ridership by GEOID in King County, WA"),
+  h2("title"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
