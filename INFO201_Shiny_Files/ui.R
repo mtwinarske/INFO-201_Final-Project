@@ -7,13 +7,12 @@ library(shinythemes)
 overview_sidebar <- sidebarPanel(
           
 # Research Questions
-                                 h4("Research Questions:"),
+                                 h3("Research Questions:"),
                                  p("How does geographical proximity to public transportation affect overall ridership?"),
                                  p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
                                  p("How do income & poverty impact usage?"),
-                                 br(),
 # Data used and Sources
-                                 h4("Data used & Sources:"),
+                                 h3("Data used & Sources:"),
                                  strong("Datasets:"),
                                  p("Means of Transport to Work", 
                                    a("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000")),
@@ -27,9 +26,8 @@ overview_sidebar <- sidebarPanel(
                                    a("https://kingcounty.gov/en/dept/metro/routes-and-service/schedules-and-maps")),
                                  p("Income Bracket Calculation Help",
                                    a("https://stackoverflow.com/questions/12979456/categorize-numeric-variable-into-group-bins-breaks")),
-                                 br(),
 # Data Collection & Ethical Implications
-                                 h4("Data Collection & Ethical Implications:"),
+                                 h3("Data Collection & Ethical Implications:"),
                                  p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -128,7 +126,7 @@ viz_3_tab <- tabPanel("Mode availability & Mode Choice",
 
 ## CONCLUSIONS TAB INFO
 
-conclusion_tab <- tabPanel("Project Findings",
+conclusion_tab <- tabPanel("Analysis Results",
  h1("What did we learn?"),
  p("some conclusions")
 )
