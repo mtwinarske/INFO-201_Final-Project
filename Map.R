@@ -7,7 +7,7 @@ library(mapproj)
 
 options(scipen = 999)
 
-mydata <- read.csv("IncomeTransitAlt.csv")
+Income_Transit_df <- read.csv("IncomeTransitAlt.csv")
 map_df <- read.csv("ShapeDataKingCounty.csv")
 TransitCenterLocations <- read.csv("TransitCenterLocations.csv")
 

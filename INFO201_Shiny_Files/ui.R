@@ -63,7 +63,15 @@ overview_tab <- tabPanel("Overview",
 ######################################################
 
 # Sidebar for Viz 1 #
-viz_1_sidebar <- sidebarPanel(
+viz_1_sidebar <- sidebarPanel(h3("How is the proximity to TCs relevant?"),
+                              p("Transit Centers act as regional hubs that offer many different bus routes,
+                                and help connect cities in a web of low-cost public transit. "),
+                              h3("Observational Analysis:"),
+                              p("By visualizing the dataset for ridership numbers, and observing the decrease in
+                                ridership as distance increases, we can infer that people are discouraged to take
+                                public transportation due to the low accessability. This visualization suggests that
+                                by increasing the amount of transit centers, or by increasing the frequency of bus trips,
+                                we may be able to boost ridership numbers."),
                               h3("Map Options:"),
                               radioButtons("radio", label = strong("Transit Center Presence in GEOIDs"),
                                            choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
@@ -74,7 +82,7 @@ viz_1_sidebar <- sidebarPanel(
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("title"),
+  h2("Ridership numbers & Transit Centers in King County, WA", align = "center"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
@@ -96,7 +104,7 @@ viz_2_sidebar <- sidebarPanel(
 )
 
 viz_2_main_panel <- mainPanel(
-  h2("Vizualization 2 Title"),
+  h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
