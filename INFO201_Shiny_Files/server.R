@@ -1,12 +1,17 @@
+library(shiny)
+library(shinythemes)
+library(tidycensus)
+library(tidyverse)
+library(plotly)
+library(ggplot2)
 
 server <- function(input, output){
-  data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
+  plot_data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
   Transit.Center_df <- read_csv("TransitCenterLocations.csv")
   
   
     # You can access the values of the widget (as a vector)
     # with input$radio, e.g.
-    output$value <- renderPrint({ input$radio })
     
     output$poverty_plot <- renderPlot({
       if (input$chart_type == "Car/Truck/Van Driving Alone") {

@@ -2,6 +2,8 @@ library(tidycensus)
 library(sf)
 library(tidyverse)
 library(viridis)
+
+install.packages()
 census_api_key("5adc81c9c101a3cbe6db02d12867966425f6e5cf", install = TRUE, overwrite=TRUE)  # Install for future R sessions
 readRenviron("~/.Renviron")
 Sys.getenv("CENSUS_API_KEY")

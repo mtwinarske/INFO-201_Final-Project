@@ -3,7 +3,7 @@ library(shinythemes)
 library(tidycensus)
 library(tidyverse)
 library(plotly)
-
+library(ggplot2)
 
 ######################################################
 ################### Overview-Tab #####################
@@ -110,7 +110,7 @@ viz_2_sidebar <- sidebarPanel(
 
 viz_2_main_panel <- mainPanel(
   h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
-  # plotlyOutput(outputId = "poverty_plot")
+  plotlyOutput(outputId = "poverty_plot")
 )
 
 viz_2_tab <- tabPanel("Poverty Status Distribution",
