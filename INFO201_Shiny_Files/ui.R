@@ -110,7 +110,7 @@ viz_2_sidebar <- sidebarPanel(
 
 viz_2_main_panel <- mainPanel(
   h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
-  plotlyOutput(outputId = "poverty_plot")
+  plotlyOutput("poverty_plot")
 )
 
 viz_2_tab <- tabPanel("Poverty Status Distribution",
@@ -153,17 +153,14 @@ conclusion_tab <- tabPanel("Analysis Results",
 ################### Sources-Tab ######################
 ######################################################
 
-sources_sidebar <- sidebarPanel(
-  h2("Text here"))
-
+#source main panel
 sources_main_panel <- mainPanel(
   h2("Sources"))
 
+
+# source tab layout
 sources_tab <- tabPanel("Project Sources",
-                      sidebarLayout(
-                        sources_sidebar,
-                        sources_main_panel
-                      ))
+                        sources_main_panel)
 
 
 

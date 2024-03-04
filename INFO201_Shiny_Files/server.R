@@ -6,14 +6,12 @@ library(plotly)
 library(ggplot2)
 
 server <- function(input, output){
-  plot_data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
-  Transit.Center_df <- read_csv("TransitCenterLocations.csv")
-  
+  data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
   
     # You can access the values of the widget (as a vector)
     # with input$radio, e.g.
     
-    output$poverty_plot <- renderPlot({
+    output$poverty_plot <- renderPlotly({
       if (input$chart_type == "Car/Truck/Van Driving Alone") {
         plot_data <- data[, c(11, 12, 13)]
       } else if (input$chart_type == "Public Transportation") {
@@ -34,7 +32,7 @@ server <- function(input, output){
         "Mean_Percentage" = c(below_100, between_100_149, above_150)
       )
       
-      ggplot(plot_df, aes(x = Poverty_Status, y = Mean_Percentage, fill = Poverty_Status)) +
+     ggplot(plot_df, aes(x = Poverty_Status, y = Mean_Percentage, fill = Poverty_Status)) +
         geom_bar(stat = "identity") +
         labs(x = "Poverty Status", y = "Mean Percentage", fill = "Poverty Status",
              title = paste("Average", input$chart_type, "Distribution")) +
