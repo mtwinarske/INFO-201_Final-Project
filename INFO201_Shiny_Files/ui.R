@@ -2,6 +2,7 @@ library(shiny)
 library(shinythemes)
 library(tidycensus)
 library(tidyverse)
+library(plotly)
 
 
 ######################################################
@@ -86,7 +87,7 @@ viz_1_sidebar <- sidebarPanel(h3("How is the proximity to TCs relevant?"),
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
   h2("Ridership numbers & Transit Centers in King County, WA", align = "center"),
-  # plotlyOutput(outputId = "your_viz_1_output_id")
+  plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
 # Tab label and Format of Viz 1 #
@@ -103,48 +104,67 @@ viz_1_tab <- tabPanel("Geography & Ridership",
 
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  #TODO: Put inputs for modifying graph here
+  selectInput("chart_type", "Select Mode of Transport",
+  choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status"))
 )
 
 viz_2_main_panel <- mainPanel(
   h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
-  # plotlyOutput(outputId = "your_viz_1_output_id")
+  # plotlyOutput(outputId = "poverty_plot")
 )
 
-viz_2_tab <- tabPanel("Economics & Ridership",
+viz_2_tab <- tabPanel("Poverty Status Distribution",
   sidebarLayout(
     viz_2_sidebar,
-    viz_2_main_panel
-  )
-)
+    viz_2_main_panel,
+  ))
 
 ######################################################
 #################### VIZ-3-Tab #######################
 ######################################################
 
+#viz 3 sidebar
 viz_3_sidebar <- sidebarPanel(
   h2("Options for graph"),
   #TODO: Put inputs for modifying graph here
 )
 
+# viz 3 main panel
 viz_3_main_panel <- mainPanel(
   h2("Vizualization 3 Title"),
   # plotlyOutput(outputId = "your_viz_1_output_id")
 )
 
+# layout for viz_3_tab
 viz_3_tab <- tabPanel("Mode availability & Mode Choice",
   sidebarLayout(
     viz_3_sidebar,
-    viz_3_main_panel
-  )
-)
+    viz_3_main_panel))
 
-## CONCLUSIONS TAB INFO
+######################################################
+################### Conclusion-Tab ###################
+######################################################
 
 conclusion_tab <- tabPanel("Analysis Results",
  h1("What did we learn?"),
- p("some conclusions")
-)
+ p("some conclusions"))
+
+######################################################
+################### Sources-Tab ######################
+######################################################
+
+sources_sidebar <- sidebarPanel(
+  h2("Text here"))
+
+sources_main_panel <- mainPanel(
+  h2("Sources"))
+
+sources_tab <- tabPanel("Project Sources",
+                      sidebarLayout(
+                        sources_sidebar,
+                        sources_main_panel
+                      ))
+
 
 
 
@@ -153,5 +173,6 @@ ui <- navbarPage("Equity in Transportation",
   viz_1_tab,
   viz_2_tab,
   viz_3_tab,
-  conclusion_tab
+  conclusion_tab,
+  sources_tab
 )
