@@ -1,5 +1,8 @@
 library(shiny)
 library(shinythemes)
+library(tidycensus)
+library(tidyverse)
+
 
 ######################################################
 ################### Overview-Tab #####################
@@ -115,7 +118,9 @@ viz_2_tab <- tabPanel("Economics & Ridership",
   )
 )
 
-## VIZ 3 TAB INFO
+######################################################
+#################### VIZ-3-Tab #######################
+######################################################
 
 viz_3_sidebar <- sidebarPanel(
   h2("Options for graph"),

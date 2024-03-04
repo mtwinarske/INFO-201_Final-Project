@@ -6,16 +6,16 @@ census_api_key("5adc81c9c101a3cbe6db02d12867966425f6e5cf", install = TRUE, overw
 readRenviron("~/.Renviron")
 Sys.getenv("CENSUS_API_KEY")
 
-library(tidycensus)
-library(sf)
+TransitCenter_df <- read_csv("TransitCenterLocations.csv")
 
 get_king_county_tracts <- function() {
   # Set your Census API key (replace with your actual key)
-  census_api_key("5adc81c9c101a3cbe6db02d12867966425f6e5cf", install = TRUE)
+  census_api_key("5adc81c9c101a3cbe6db02d12867966425f6e5cf", install = TRUE, overwrite = TRUE)
   
   # Fetch Census tract data for King County
-  king_county_tracts <- get_decennial(
+  king_county_tracts <- get_acs(
     geography = "tract",
+    variables = c('B01001_020E'),
     state = "WA",
     county = "King",
     geometry = TRUE,
@@ -25,9 +25,15 @@ get_king_county_tracts <- function() {
   return(king_county_tracts)
 }
 
-# Call the custom function to get King County tract shapes
-king_tracts_sf <- get_king_county_tracts()
 
-# Now you can explore and visualize the data (e.g., create maps)
-# For example:
-plot(king_tracts_sf["geometry"])
+king_tracts_sf <- get_king_county_tracts()
+plot(king_tracts_sf ['geometry'])
+
+TransitCenter_map <- ggplot(king_tracts_sf) +
+  geom_sf() +  # Plot the Census tract shapes
+  geom_point(data = TransitCenter_df, aes(x = Long,
+                                          y = Lat, 
+                                          color = "red")) +
+  coord_map("mercator")
+
+plot(TransitCenter_map ['geometry'])
