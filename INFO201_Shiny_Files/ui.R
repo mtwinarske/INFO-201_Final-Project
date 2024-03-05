@@ -102,11 +102,17 @@ viz_1_tab <- tabPanel("Geography & Ridership",
 ######################################################
 
 viz_2_sidebar <- sidebarPanel(
-  h2("Options for graph"),
+  h2("Our Question: How Does Poverty Status Vary Across Different Modes of Transportation?"),
   selectInput("chart_type", 
               "Select Mode of Transport",
-  choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status"))
+  choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status")),
+  p("This chart aims to illustrate the mode of transport based on the poverty status of individuals. 
+  The graph illustrates how poverty status varies across different transportation modes. By examining the distribution, 
+  we can identify patterns regarding how poverty intersects with transportation dependencies. Understanding this distribution can offer 
+  insights into economic disparities and accessibility issues related to transportation options. Policymakers and urban planners 
+    can use this information to influence the future of King County’s transportation system in an equitable and inclusive manner.")
 )
+
 
 viz_2_main_panel <- mainPanel(
   h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
@@ -161,13 +167,29 @@ conclusion_tab <- tabPanel("Analysis Results",
 
 #source main panel
 sources_main_panel <- mainPanel(
-  h2("Sources"))
+  h2(HTML("<b>Sources</b>")),
+  p("Our Income Data, sourced from the United States Census Bureau: "),
+  p("https://data.census.gov/table/ACSST5Y2022.S1903?g=050XX00US53033$1400000"),
+  p("This source offered great insights into the socioecnomic landscape of King County."),
+  p("Our Transit Data, sourced from the United States Census Bureau: "),
+  p("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000"),
+  p("This source offered insights on the usage of transportation throughout King County, relating to poverty 
+    status and vehicle availability."),
+  p("Our Zip Code Data, Sourced from Proximity One: "),
+  p("https://proximityone.com/ziptractequiv.htm"),
+  p("This source gave us the opportunity to evaluate GEOIDs by zip codes."),
+  h2(HTML("<b>Issues With Our Data: </b>")), 
+  p("Renters and certain demographic groups are often underrepresented in census data collection. 
+    For this reason our data, which aims to understand the relationship between transit usage and 
+    income, may be impacted by the undercounting of those which are likely in the lower financial brackets 
+    such as renters. Additionally, this data also only collects information from King County households, 
+    which may leave out workers that travel from other counties to work in King County.")
+)
 
 
 # source tab layout
 sources_tab <- tabPanel("Project Sources",
                         sources_main_panel)
-
 
 
 
