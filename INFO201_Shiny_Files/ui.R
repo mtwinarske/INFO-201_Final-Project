@@ -13,8 +13,8 @@ overview_sidebar <- sidebarPanel(
 # Research Questions
                                  h3("Research Questions:"),
                                  p("How does geographical proximity to public transportation affect overall ridership?"),
-                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
                                  p("How do income & poverty impact usage?"),
+                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
 # Data used and Sources
                                  h3("Data used & Sources:"),
                                  strong("Datasets:"),
