@@ -36,8 +36,7 @@ overview_sidebar <- sidebarPanel(
                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                   nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                   deserunt mollit anim id est laborum."),
+                                   nulla pariatur."),
                                  
                                  
   
@@ -47,7 +46,7 @@ overview_main_panel <- mainPanel(
    h2("An Observational Analysis of Equity in the KCM System"),
    h4("Angel Hill, Rose Garly, & Miles Winarske"),
    br(),
-   img(src = "KCM-New_Flyer.jpg", height = 650, width = 1000),
+   img(src = "KCM-New_Flyer.jpg", height = 625, width = 1000),
    h6("Image Source:",
      a("https://www.flickr.com/photos/brasegaliwa/12870751595/"))
 )
