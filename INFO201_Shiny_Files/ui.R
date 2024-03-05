@@ -13,8 +13,8 @@ overview_sidebar <- sidebarPanel(
 # Research Questions
                                  h3("Research Questions:"),
                                  p("How does geographical proximity to public transportation affect overall ridership?"),
-                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
                                  p("How do income & poverty impact usage?"),
+                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
 # Data used and Sources
                                  h3("Data used & Sources:"),
                                  strong("Datasets:"),
@@ -129,16 +129,19 @@ viz_2_tab <- tabPanel("Poverty Status Distribution",
 #################### VIZ-3-Tab #######################
 ######################################################
 
-#viz 3 sidebar
 viz_3_sidebar <- sidebarPanel(
   h2("Chart type selection"),
   radioButtons("radio",
-              h3("Select Mode of Transport"),
-  choices = list("Car/Truck/Van Driving Alone",
-              "Public Transportation",
-              "Carpool"),
-  selected = "Car/Truck/Van Driving Alone"
-))
+               h3("Select Mode of Transport"),
+               choices = list("Car/Truck/Van Driving Alone",
+                              "Public Transportation",
+                              "Carpool"),
+               selected = "Car/Truck/Van Driving Alone"),
+  h3("How is vehicle availability relevant?"),
+  p("We assume that vehicle availability in household and income is somewhat dependent, 
+     but having a vehicle available would likely make public transport less appealing. Following our data on transit maps, 
+     acquiring a vehicle could be a necessity for households if no public transport is available.")
+)
 
 # viz 3 main panel
 viz_3_main_panel <- mainPanel(
@@ -157,9 +160,37 @@ viz_3_tab <- tabPanel("Mode availability & Mode Choice",
 ################### Conclusion-Tab ###################
 ######################################################
 
+# Sidebar content
+conclusion_sidebar <- sidebarPanel(
+  br(),
+  img(src = "1436294.jpg", height = 208, width = 333),
+  h6("Image Source:",
+     a("https://www.stocksy.com/1436294/seattle-skyline-at-sunset-with-mount-rainier-in-the-background")),
+  h3("Method"),
+  p("In this analysis, we employed a combination of data visualization techniques and statistical methods to investigate the factors influencing public transportation ridership."),
+  h3("Analysis"),
+  p("Our analysis focused on three main aspects: the impact of geographical proximity to public transportation, the influence of income and poverty levels, and the relationship between vehicle ownership and transit usage.")
+)
+
+# Main panel content
+conclusion_main_panel <- mainPanel(
+  h1("What did we learn?"),
+  h3("How does geographical proximity to public transportation affect overall ridership?"),
+  p("Our findings suggest that proximity to public transportation significantly affects overall ridership. Areas with better access to public transit options tend to have higher ridership rates."),
+  h3("How do income & poverty impact usage?"),
+  p("Income and poverty levels have a notable impact on transit usage. Lower-income areas often rely more heavily on public transportation, while higher-income areas may have greater access to private vehicles, leading to lower transit usage."),
+  h3("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
+  p("Vehicle ownership rates inversely correlate with public transit usage. Areas with lower rates of vehicle ownership tend to have higher public transportation ridership.")
+)
+
+# Tab label and format
 conclusion_tab <- tabPanel("Analysis Results",
- h1("What did we learn?"),
- p("some conclusions"))
+                           sidebarLayout(
+                             conclusion_sidebar,
+                             conclusion_main_panel
+                           )
+)
+
 
 ######################################################
 ################### Sources-Tab ######################
