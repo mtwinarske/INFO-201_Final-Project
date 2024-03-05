@@ -104,7 +104,8 @@ viz_1_tab <- tabPanel("Geography & Ridership",
 
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  selectInput("chart_type", "Select Mode of Transport",
+  selectInput("chart_type", 
+              "Select Mode of Transport",
   choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status"))
 )
 
@@ -125,21 +126,27 @@ viz_2_tab <- tabPanel("Poverty Status Distribution",
 
 #viz 3 sidebar
 viz_3_sidebar <- sidebarPanel(
-  h2("Options for graph"),
-  #TODO: Put inputs for modifying graph here
-)
+  h2("Chart type selection"),
+  radioButtons("radio",
+              h3("Select Mode of Transport"),
+  choices = list("Car/Truck/Van Driving Alone",
+              "Public Transportation",
+              "Carpool"),
+  selected = "Car/Truck/Van Driving Alone"
+))
 
 # viz 3 main panel
 viz_3_main_panel <- mainPanel(
-  h2("Vizualization 3 Title"),
-  # plotlyOutput(outputId = "your_viz_1_output_id")
+  h2("Transit Usage & Vehicles Availible in Household"),
+  plotlyOutput("vehicle_plot")
 )
 
 # layout for viz_3_tab
 viz_3_tab <- tabPanel("Mode availability & Mode Choice",
   sidebarLayout(
     viz_3_sidebar,
-    viz_3_main_panel))
+    viz_3_main_panel
+  ))
 
 ######################################################
 ################### Conclusion-Tab ###################

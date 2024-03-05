@@ -2,6 +2,8 @@ library(tidycensus)
 library(sf)
 library(tidyverse)
 library(viridis)
+library(ggplot2)
+library(plot)
 
 install.packages()
 census_api_key("5adc81c9c101a3cbe6db02d12867966425f6e5cf", install = TRUE, overwrite=TRUE)  # Install for future R sessions
@@ -9,6 +11,7 @@ readRenviron("~/.Renviron")
 Sys.getenv("CENSUS_API_KEY")
 
 TransitCenter_df <- read_csv("TransitCenterLocations.csv")
+IncomeTransit_df <- read.csv("IncomeTransitAlt.csv")
 
 get_king_county_tracts <- function() {
   # Set your Census API key (replace with your actual key)
