@@ -14,7 +14,7 @@ seattle_zipcode_df <- seattle_zipcode_df %>%
   select(-contains("CITY")) %>%
   select(-contains("COUNTY")) %>%
   select(-contains("STATE"))
-  
+
 seattle_income_df <- read.csv("2021income1.csv", na.strings = c("-", "**"))
 
 seattle_income_df <- seattle_income_df %>%
@@ -43,19 +43,16 @@ IncomeTransit <- IncomeTransit %>%
 IncomeTransit$median_income <- as.numeric(IncomeTransit$median_income)
 
 # Income brackets
-IncomeTransit <- IncomeTransit %>% 
+IncomeTransit <- IncomeTransit %>%
   mutate(incomeBracket = case_when(
     median_income <= 38133 ~ "Low Income",
     median_income > 38133 & median_income <= 114000 ~ "Middle Income",
     median_income > 114000 ~ "High Income"
   ))
 
-IncomeTransit <- IncomeTransit %>%
-  filter(!is.na(median_income))
 
 IncomeTransit <- left_join(IncomeTransit, seattle_transport_df, by = "GEOID")
 
 IncomeTransit <- IncomeTransit %>% distinct(GEOID, .keep_all = TRUE)
 
-#write.csv(IncomeTransit, "IncomeTransitAlt.csv")
-
+write.csv(IncomeTransit, "IncomeTransitAlt.csv")
