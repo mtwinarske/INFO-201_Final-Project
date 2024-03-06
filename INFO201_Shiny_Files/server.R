@@ -7,14 +7,14 @@ library(plotly)
 library(ggplot2)
 library(sf)
 library(dplyr)
+library(rsconnect)
 
-setwd("INFO201_Shiny_Files")
 
 
 server <- function(input, output){
     # Read data now
     data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
-    map_data <- st_read("King_county_tracts.geojson")
+    map_data <- st_read("king_county_tracts.geojson")
     TransitCenter_df <- read_csv("TransitCenterLocations.csv")
     
     ##########################################################################################################

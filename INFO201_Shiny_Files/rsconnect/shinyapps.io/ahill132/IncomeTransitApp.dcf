@@ -1,0 +1,12 @@
+name: IncomeTransitApp
+title: IncomeTransitApp
+username: ahill132
+account: ahill132
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11422571
+bundleId: 8341332
+url: https://ahill132.shinyapps.io/IncomeTransitApp/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
