@@ -9,6 +9,8 @@ TransitCenter_df <- read_csv("TransitCenterLocations.csv")
 IncomeTransit_df <- read.csv("IncomeTransitAlt.csv")
 map_info <- st_read("king_county_tracts.geojson")
 
+map_transit_joined <- full_join(map_info, TransitCenter_df, by )
+
 
 map_joined_info <- left_join(map_info, IncomeTransit_df, by = "GEOID")
 

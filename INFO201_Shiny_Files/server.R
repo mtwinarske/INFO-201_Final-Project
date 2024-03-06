@@ -80,7 +80,7 @@ server <- function(input, output){
 ##########################################################################################################
   
 ################ Total Household Carpools Map
-  output$my_map <- renderPlot({
+  output$my_map <- renderPlotly({
     if (input$map_view == "Total Household Carpools") {
       
       my_map <- ggplot(map_joined_info) +
@@ -91,7 +91,7 @@ server <- function(input, output){
       
 ############### Total Transit Trips Map
       
-    } else if (input$map_view == "Transit Ridership") {
+    } else if (input$map_view == "Total Transit Trips per Household") {
       
       my_map <- ggplot(map_joined_info) +
         geom_sf(aes(fill = Estimate.Public.Transportation.Users.), linetype = 0.5, lwd = 1) +

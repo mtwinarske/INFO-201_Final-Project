@@ -70,27 +70,25 @@ overview_tab <- tabPanel("Overview",
 ######################################################
 
 # Sidebar for Viz 1 #
-viz_1_sidebar <- sidebarPanel(h3("How is the proximity to TCs relevant?"),
-                              p("Transit Centers act as regional hubs that offer many different bus routes,
-                                and help connect cities in a web of low-cost public transit. "),
-                              h3("Observational Analysis:"),
-                              p("By visualizing the dataset for ridership numbers, and observing the decrease in
-                                ridership as distance increases, we can infer that people are discouraged to take
-                                public transportation due to the low accessability. This visualization suggests that
-                                by increasing the amount of transit centers, or by increasing the frequency of bus trips,
-                                we may be able to boost ridership numbers."),
-                              h3("Map Options:"),
-                              radioButtons("radio", label = strong("Transit Center Presence in GEOIDs"),
-                                           choices = list("All GEOIDs" = 1, "Present" = 2, "Absent" = 3)),
-                              hr(),
-  
-  
-)
+viz_1_sidebar <- sidebarPanel(
+  h3("How is the proximity to TCs relevant?"),
+  p("Transit Centers act as regional hubs that offer many different bus routes,
+        and help connect cities in a web of low-cost public transit."),
+  h3("Observational Analysis:"),
+  p("By visualizing the dataset for ridership numbers, and observing the decrease in
+        ridership as distance increases, we can infer that people are discouraged to take
+        public transportation due to the low accessibility. This visualization suggests that
+        by increasing the amount of transit centers, or by increasing the frequency of bus trips,
+        we may be able to boost ridership numbers."),
+  h3("Map Options:"),
+  selectInput("map_view", "Select Map View:",
+              choices = c("Total Household Carpools", "Total Transit Trips per Household", "Average Income by GEOID")),
+  hr())
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
   h2("Ridership numbers & Transit Centers in King County, WA", align = "center"),
-  plotlyOutput(outputId = "your_viz_1_output_id")
+  plotlyOutput(outputId = "my_map")
 )
 
 # Tab label and Format of Viz 1 #
@@ -139,8 +137,7 @@ viz_3_sidebar <- sidebarPanel(
                h3("Select Mode of Transport"),
                choices = list("Car/Truck/Van Driving Alone",
                               "Public Transportation",
-                              "Carpool"),
-               selected = "Car/Truck/Van Driving Alone"),
+                              "Carpool")),
   h3("How is vehicle availability relevant?"),
   p("The United States as a nation is heavily reliant on vehicles for transportation,
   as much of our infrastructure centers around cars. However, this was not always the case,
