@@ -3,6 +3,7 @@ library(shinythemes)
 library(tidycensus)
 library(sf)
 library(tidyverse)
+library(viridis)
 library(ggplot2)
 library(plotly)
 
@@ -12,13 +13,14 @@ library(plotly)
 overview_sidebar <- sidebarPanel(
           
 # Research Questions
+  
                                  h3("Research Questions:"),
-                                 p("1) How does geographical proximity to public transportation affect overall ridership?"),
-                                 p("2) How do income & poverty impact usage?"),
-                                 p("3) How does vehicle ownership & the number of vehicles owned affect transit usage?"),
+                                 p("1) How does distance from transit centers correlate with the total number of public transit riders?"),
+                                 p("2) How does poverty status vary across different modes of transportation in King County, WA?"),
+                                 p("3) How does vehicle ownership and the number of vehicles owned impact transit usage?"),
 # Data used and Sources
                                  h3("Background"),
-                                 strong("History"),
+                                 strong("History:"),
                                  p("From carriages to trolleys, from the monorail to the light rail, 
                                  Seattle’s history of public transportation is rich yet complex. Though 
                                  our city has made significant strides in the evolution of our railways 
@@ -26,7 +28,7 @@ overview_sidebar <- sidebarPanel(
                                  modern day Seattle. Our project aims to examine the historical and 
                                  contemporary relationship between class and access to transportation throughout
                                  the greater Seattle area."),
-                                 strong("Data is inherently biased"),
+                                 strong("Data is inherently biased:"),
                                  p("Renters and certain demographic groups are often underrepresented in census data
                                    collection. For this reason our data, which aims to understand the relationship
                                    between transit usage and income, may be impacted by the undercounting of those
@@ -72,28 +74,37 @@ overview_tab <- tabPanel("Overview",
 
 # Sidebar for Viz 1 #
 viz_1_sidebar <- sidebarPanel(
-  h3("How is the proximity to TCs relevant?"),
+  h3("How does distance from transit centers correlate with the total number of public transit riders?"),
+  strong("What is a Transit Center?"),
   p("Transit Centers act as regional hubs that offer many different bus routes,
-        and help connect cities in a web of low-cost public transit."),
-  h3("Observational Analysis:"),
-  p("By visualizing the dataset for ridership numbers, and observing the decrease in
-        ridership as distance increases, we can infer that people are discouraged to take
-        public transportation due to the low accessibility. This visualization suggests that
-        by increasing the amount of transit centers, or by increasing the frequency of bus trips,
-        we may be able to boost ridership numbers."),
-  h3("Map Options:"),
+        and help connect cities in a web of low-cost public transportation. These are visualized on the Map as black dots."),
+  h3(""),
+  p(""),
+  br(),
   selectInput("map_chart_type", "Select Map View:",
-              choices = c("Total Household Carpools", "Total Transit Trips per Household", "Median Income by GEOID")),
-  hr())
+              choices = c("Total Public Transportation Riders", "Total People in Poverty")),
+  selected = "Total Transit Trips per Household",
+  hr(),
+  strong("What do these Map Variables represent?"),
+  div(),
+  em("Total Public Transportation Riders:"),
+  p("This part of the map illustrates the estimated total number of public transportation riders in each geographic area. It provides insights into how significant of a role public transportation services play in households within King County. Darker colors indicate lower transit usage, while lighter colors represent higher usage."),
+  br(),
+  em("Total People in Poverty"),
+  p("This aspect of the map represents the estimated number of individuals living in poverty within different geographic areas (such as census tracts) in King County, WA. The color shading on the map reflects the severity of poverty. Darker shades indicate lower poverty levels, while lighter shades represent higher poverty levels.Areas with a larger concentration of people in poverty will appear more prominently on the map.")
+)
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("Ridership numbers & Transit Centers in King County, WA"),
+  h2("Geographical Proximity to Transit Centers & Ridership"),
+  br(),
+  br(),
+  br(),
   plotlyOutput(outputId = "map_plot")
 )
 
 # Tab label and Format of Viz 1 #
-viz_1_tab <- tabPanel("Geography & Ridership",
+viz_1_tab <- tabPanel("Transit & Poverty Map",
   sidebarLayout(
     viz_1_sidebar,
     viz_1_main_panel
@@ -105,7 +116,8 @@ viz_1_tab <- tabPanel("Geography & Ridership",
 ######################################################
 
 viz_2_sidebar <- sidebarPanel(
-  h2("How Does Poverty Status Vary Across Different Modes of Transportation?"),
+  h3("How does poverty status vary across different modes of transportation in King County, WA?
+"),
   selectInput("chart_type", 
               "Select Mode of Transport",
   choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status")),
@@ -119,6 +131,9 @@ viz_2_sidebar <- sidebarPanel(
 
 viz_2_main_panel <- mainPanel(
   h2("Economic Background & Transit Ridership in King County, WA"),
+  br(),
+  br(),
+  br(),
   plotlyOutput("poverty_plot")
 )
 
@@ -131,19 +146,14 @@ viz_2_tab <- tabPanel("Poverty Status Distribution",
 ######################################################
 #################### VIZ-3-Tab #######################
 ######################################################
-# viz 3 main panel
-viz_3_main_panel <- mainPanel(
-  h2("Transit Usage & Vehicles Availible in Household"),
-  plotlyOutput("vehicle_plot")
-)
+
 viz_3_sidebar <- sidebarPanel(
-  h2("Chart type selection"),
+  h3("How does vehicle ownership and the number of vehicles owned impact transit usage?"),
   radioButtons("vehicle_chart_type",
-               "Select Mode of Transport",
-               choices = c("Car/Truck/Van Driving Alone",
+               h3("Select Mode of Transport"),
+               choices = list("Car/Truck/Van Driving Alone",
                               "Public Transportation",
                               "Carpool")),
-  
   h3("How is vehicle availability relevant?"),
   p("The United States as a nation is heavily reliant on vehicles for transportation,
   as much of our infrastructure centers around cars. However, this was not always the case,
@@ -158,7 +168,14 @@ viz_3_sidebar <- sidebarPanel(
   affects disadvantaged communities."),
 )
 
-
+# viz 3 main panel
+viz_3_main_panel <- mainPanel(
+  h2("Transit Usage & Vehicles Availible in Household"),
+  br(),
+  br(),
+  br(),
+  plotlyOutput("vehicle_plot")
+)
 
 # layout for viz_3_tab
 viz_3_tab <- tabPanel("Mode availability & Mode Choice",
@@ -174,7 +191,7 @@ viz_3_tab <- tabPanel("Mode availability & Mode Choice",
 # Sidebar content
 conclusion_sidebar <- sidebarPanel(
   br(),
-  img(src = "1436294.jpg", height = 208, width = 333),
+  img(src = "1436294.jpg", height = 408, width = 555),
   h6("Image Source:",
      a("https://www.stocksy.com/1436294/seattle-skyline-at-sunset-with-mount-rainier-in-the-background")),
   h3("Method"),
@@ -189,7 +206,7 @@ conclusion_sidebar <- sidebarPanel(
 
 # Main panel content
 conclusion_main_panel <- mainPanel(
-  h1("What did we learn?"),
+  h2("What did we learn?"),
   p("Gentrification is a major issue within Seattle, as it is the third most gentrifying
   city in the nation. Looking into this issue in the context of transportation, we have
   become glaringly aware that even positive urban planning outcomes have influenced 
@@ -200,7 +217,13 @@ conclusion_main_panel <- mainPanel(
   has led us to ask the question: is access to public transportation really granted to those who need it?"),
   
   h3("How does geographical proximity to public transportation affect overall ridership?"),
-  p("Miles writes his conclusion here!"),
+  p("By visualizing two significant datasets, we gain unique insights into the relationship between 
+    transit ridership and proximity to transit centers. Our spatial visualization reveals a positive 
+    trend: areas closer to transit centers tend to have higher ridership. Additionally, overlaying poverty 
+    levels on a map of transit center locations allows us to infer their strategic placement to serve people 
+    of low income. However, it’s essential to note that some census tracts show higher ridership slightly away 
+    from transit centers, possibly due to zoning variations. Understanding these dynamics informs better urban 
+    planning and transportation policies. "),
   h3("How do income & poverty impact usage?"),
   p("Income and poverty levels have a notable impact on transit usage.
     Lower-income areas often rely more heavily on public transportation,
@@ -241,6 +264,12 @@ sources_main_panel <- mainPanel(
   h4("Our Zip Code Data, Sourced from Proximity One: "),
   a("https://proximityone.com/ziptractequiv.htm"),
   p("This source gave us the opportunity to evaluate GEOIDs by zip codes."),
+  h4("Our Spatial Data, sourced from the King County OpenGIS Website:"),
+  a("https://hub.arcgis.com/datasets/kingcounty::2020-census-tracts-for-king-county-tracts20-area/about"),
+  p("This source was invaluable in creating a shapefile to use for map creation."),
+  h4("Transit Center Locations, sourced from the King County OpenGIS Website:"),
+  a("https://gis-kingcounty.opendata.arcgis.com/datasets/73761efff1d94c9dbd298346e6193b9d_395/explore?location=47.540412%2C-122.202600%2C11.00"),
+  p("This source was used to overlay Transit Center Locations on the Maps.")
 )
 
 

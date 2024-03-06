@@ -12,7 +12,8 @@ library(dplyr)
 server <- function(input, output){
     # Read data now
     data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
-    map_data <- st_read("king_county_tracts.geojson")
+    map_data <- st_read("King_county_tracts.geojson")
+
     TransitCenter_df <- read_csv("TransitCenterLocations.csv")
     
     ##########################################################################################################
@@ -78,27 +79,27 @@ server <- function(input, output){
 ################################# mapping-plots ##########################################################
 ##########################################################################################################
   
-  output$map_plot <- renderPlotly({
-    plot_data <- NULL
-    
-    if (input$map_chart_type == "Total Household Carpools") {
-      plot_data <- as.numeric(as.character(data[["Estimate.Car.truck.or.van.households.carpooled."]]))
-    } else if (input$map_chart_type == "Total Transit Trips per Household") {
-      plot_data <- as.numeric(as.character(data[["Estimate.Public.Transportation.Users."]]))
-    } else if (input$map_chart_type == "Median Income by GEOID") {
-      plot_data <- as.numeric(as.character(data[["median_income"]]))
-    }
-    
-    plot_data <- replace_na(plot_data, 0)
-    
-    ggplot_object <- ggplot(map_data) +
-      geom_sf(aes(fill = plot_data), linetype = 0.5, lwd = 1) +
-      geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
-      coord_sf() +
-      scale_fill_gradient(low = "blue", high = "yellow")
-    
-    ggplotly(ggplot_object)
-  })
+    output$map_plot <- renderPlotly({
+      if (input$map_chart_type == "Total Public Transportation Riders") {
+        plot_data <- data$Estimate.Public.Transportation.Users.
+        title_map <- "Total Public Transportation Trips per Rider in King County, WA"
+      } else if (input$map_chart_type == "Total People in Poverty") {
+        plot_data <- data$Estimate.Total.poverty.status.determined
+        title_map <- "Total Carpool trips per Household in King County, WA"
+      } 
+      base_map <- ggplot(map_data) +
+        geom_sf(aes(fill = plot_data)) +
+        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
+        coord_sf() +
+        scale_fill_gradient(low = "brown", high = "gold") +
+        labs(title = title_map,
+             fill = input$map_chart_type)
+      
+     
+      
+      
+      ggplotly(base_map)
+    })
 }
 
 
