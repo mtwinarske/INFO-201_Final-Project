@@ -142,9 +142,17 @@ viz_3_sidebar <- sidebarPanel(
                               "Carpool"),
                selected = "Car/Truck/Van Driving Alone"),
   h3("How is vehicle availability relevant?"),
-  p("We assume that vehicle availability in household and income is somewhat dependent, 
-     but having a vehicle available would likely make public transport less appealing. Following our data on transit maps, 
-     acquiring a vehicle could be a necessity for households if no public transport is available.")
+  p("The United States as a nation is heavily reliant on vehicles for transportation,
+  as much of our infrastructure centers around cars. However, this was not always the case,
+  as the railroad efforts in the United States were a major development and certainly set up
+  hopes for a promising American railway system. The rise of the motor vehicle following the
+  Second World War sidelined our progress with railway development, and as vehicles became more
+  accessible over the 20th century, dreams of a robust American railway were nearly forgotten.
+  Access to vehicles is far more limited for those within our community who are economically
+  disadvantaged. Thus, public transportation is essential for a significant portion of our
+  population. Despite this, access to public transportation is limited even in large metropolitan
+  areas. This limited access to both public and motor vehicle transportation disproportionately 
+  affects disadvantaged communities."),
 )
 
 # viz 3 main panel
@@ -171,20 +179,41 @@ conclusion_sidebar <- sidebarPanel(
   h6("Image Source:",
      a("https://www.stocksy.com/1436294/seattle-skyline-at-sunset-with-mount-rainier-in-the-background")),
   h3("Method"),
-  p("In this analysis, we employed a combination of data visualization techniques and statistical methods to investigate the factors influencing public transportation ridership."),
+  p("In this analysis, we employed a combination of data visualization techniques
+    and statistical methods to investigate the factors influencing public 
+    transportation ridership."),
   h3("Analysis"),
-  p("Our analysis focused on three main aspects: the impact of geographical proximity to public transportation, the influence of income and poverty levels, and the relationship between vehicle ownership and transit usage.")
+  p("Our analysis focused on three main aspects: the impact of geographical
+    proximity to public transportation, the influence of income and poverty levels,
+    and the relationship between vehicle ownership and transit usage.")
 )
 
 # Main panel content
 conclusion_main_panel <- mainPanel(
   h1("What did we learn?"),
+  p("Gentrification is a major issue within Seattle, as it is the third most gentrifying
+  city in the nation. Looking into this issue in the context of transportation, we have
+  become glaringly aware that even positive urban planning outcomes have influenced 
+  change within the city. The development of the light rail has resulted in further
+  displacement of locals, as TOD (Transit Oriented Development), led to higher development
+  in the regions it was available. Therefore, access to public transportation may lead to the
+  destruction of the local populations that actually rely on it. This interesting dichotomy
+  has led us to ask the question: is access to public transportation really granted to those who need it?"),
+  
   h3("How does geographical proximity to public transportation affect overall ridership?"),
-  p("Our findings suggest that proximity to public transportation significantly affects overall ridership. Areas with better access to public transit options tend to have higher ridership rates."),
+  p("Miles writes his conclusion here!"),
   h3("How do income & poverty impact usage?"),
-  p("Income and poverty levels have a notable impact on transit usage. Lower-income areas often rely more heavily on public transportation, while higher-income areas may have greater access to private vehicles, leading to lower transit usage."),
+  p("Income and poverty levels have a notable impact on transit usage.
+    Lower-income areas often rely more heavily on public transportation,
+    while higher-income areas may have greater access to private vehicles,
+    leading to lower transit usage. The graph illustrates how poverty status 
+    varies across uses of public transport, carpooling and driving alone. 
+    By examining the distribution, we can identify patterns regarding how poverty
+    intersects with higher use of public transport and carpooling."),
   h3("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
-  p("Vehicle ownership rates inversely correlate with public transit usage. Areas with lower rates of vehicle ownership tend to have higher public transportation ridership.")
+  p("Vehicle ownership rates inversely correlate with public transit usage. 
+    Areas with lower rates of vehicle ownership tend to have higher public transportation ridership. 
+    Carpooling users seem to have the fewest vehicles avaliable.")
 )
 
 # Tab label and format
