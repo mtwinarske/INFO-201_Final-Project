@@ -1,7 +1,7 @@
 library(tidycensus)
 library(sf)
 library(tidyverse)
-library(viridis)
+
 library(ggplot2)
 library(plot)
 

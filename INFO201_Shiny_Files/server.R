@@ -1,16 +1,22 @@
+# load packages for project
 library(shiny)
 library(shinythemes)
 library(tidycensus)
 library(tidyverse)
 library(plotly)
 library(ggplot2)
+library(sf)
 
 server <- function(input, output){
+# Read data now
   data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
-  
-    # You can access the values of the widget (as a vector)
-    # with input$radio, e.g.
-    
+  map_data <- st_read("king_county_tracts.geojson")
+  map_joined_info <- left_join(map_data, data, by = "GEOID")
+  TransitCenter_df <- read_csv("TransitCenterLocations.csv")
+
+##########################################################################################################
+################################# poverty/income-plot ####################################################
+##########################################################################################################
     output$poverty_plot <- renderPlotly({
       if (input$chart_type == "Car/Truck/Van Driving Alone") {
         plot_data <- data[, c(11, 12, 13)]
@@ -39,7 +45,9 @@ server <- function(input, output){
         theme_gray()
     })
     
-# vehicle plot
+##########################################################################################################
+################################# vehicle-plot ###########################################################
+##########################################################################################################
     
     output$vehicle_plot <- renderPlotly({
       if (input$chart_type == "Car/Truck/Van Driving Alone") {
@@ -64,7 +72,44 @@ server <- function(input, output){
         geom_bar(stat = "identity") +
         labs(x = "Available vehicles", y = "Mean Percentage", fill = "Available vehicles",
              title = paste("Average", input$chart_type, "Distribution")) +
-        theme_minimal()
+        theme_gray()
     })
+  
+##########################################################################################################
+################################# mapping-plots ##########################################################
+##########################################################################################################
+  
+################ Total Household Carpools Map
+  output$my_map <- renderPlot({
+    if (input$map_view == "Total Household Carpools") {
+      
+      my_map <- ggplot(map_joined_info) +
+        geom_sf(aes(fill = Estimate.Car.truck.or.van.households.carpooled.), linetype = 0.5, lwd = 1) +
+        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
+        coord_sf() +
+        scale_fill_gradient(low = "blue", high = "yellow")
+      
+############### Total Transit Trips Map
+      
+    } else if (input$map_view == "Transit Ridership") {
+      
+      my_map <- ggplot(map_joined_info) +
+        geom_sf(aes(fill = Estimate.Public.Transportation.Users.), linetype = 0.5, lwd = 1) +
+        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
+        coord_sf() +
+        scale_fill_gradient(low = "blue", high = "yellow")
+      
+      
+################ Income Bracket Map
+      
+    } else {
+      my_map <- ggplot(map_joined_info) +
+        geom_sf(aes(fill = median_income), linetype = 0.5, lwd = 1) +
+        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
+        coord_sf() +
+        scale_fill_gradient(low = "blue", high = "yellow")
+    }
+  })
+  
 }
 
