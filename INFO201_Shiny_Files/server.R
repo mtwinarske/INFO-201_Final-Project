@@ -1,7 +1,6 @@
 # load packages for project
 library(shiny)
 library(shinythemes)
-library(tidycensus)
 library(tidyverse)
 library(tidyr)
 library(plotly)
