@@ -12,35 +12,39 @@ overview_sidebar <- sidebarPanel(
           
 # Research Questions
                                  h3("Research Questions:"),
-                                 p("How does geographical proximity to public transportation affect overall ridership?"),
-                                 p("How do income & poverty impact usage?"),
-                                 p("How does vehicle ownership & the number of vehicles owned affect transit usage?"),
+                                 p("1) How does geographical proximity to public transportation affect overall ridership?"),
+                                 p("2) How do income & poverty impact usage?"),
+                                 p("3) How does vehicle ownership & the number of vehicles owned affect transit usage?"),
 # Data used and Sources
-                                 h3("Data used & Sources:"),
-                                 strong("Datasets:"),
-                                 p("Means of Transport to Work", 
-                                   a("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000")),
-                                 p("Median Income in the Past 12 Months",
-                                   a("https://data.census.gov/table/ACSST5Y2022.S1903?g=050XX00US53033$1400000")),
-                                 p("Equivalencing ZIP Code and Census Tract Geographies",a("https://proximityone.com/ziptractequiv.htm")),
-                                 strong("Supplemental refererences:"),
-                                 p("Income Bracket Reference",
-                                   a("https://www.bls.gov/news.release/wkyeng.nr0.htm")),
-                                 p("King County Transit Center Zipcodes",
-                                   a("https://kingcounty.gov/en/dept/metro/routes-and-service/schedules-and-maps")),
-                                 p("Income Bracket Calculation Help",
-                                   a("https://stackoverflow.com/questions/12979456/categorize-numeric-variable-into-group-bins-breaks")),
+                                 h3("Background"),
+                                 strong("History"),
+                                 p("From carriages to trolleys, from the monorail to the light rail, 
+                                 Seattle’s history of public transportation is rich yet complex. Though 
+                                 our city has made significant strides in the evolution of our railways 
+                                 and public metro, disparities in access to transportation still exist in 
+                                 modern day Seattle. Our project aims to examine the historical and 
+                                 contemporary relationship between class and access to transportation throughout
+                                 the greater Seattle area."),
+                                 strong("Data is inherently biased"),
+                                 p("Renters and certain demographic groups are often underrepresented in census data
+                                   collection. For this reason our data, which aims to understand the relationship
+                                   between transit usage and income, may be impacted by the undercounting of those
+                                   which are likely in the lower financial brackets such as renters. Additionally,
+                                   this data also only collects information from King County households, which may
+                                   leave out workers that travel from other counties to work in King County."))
+
+
+
 # Data Collection & Ethical Implications
-                                 h3("Data Collection & Ethical Implications:"),
-                                 p("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                   nulla pariatur."),
+h4(HTML("<b>Issues With Our Data: </b>"))
+p("Renters and certain demographic groups are often underrepresented in census data collection. 
+    For this reason our data, which aims to understand the relationship between transit usage and 
+    income, may be impacted by the undercounting of those which are likely in the lower financial brackets 
+    such as renters. Additionally, this data also only collects information from King County households, 
+    which may leave out workers that travel from other counties to work in King County.")
                                  
                                  
   
-)
 
 overview_main_panel <- mainPanel(
    h2("An Observational Analysis of Equity in the KCM System"),
@@ -199,22 +203,16 @@ conclusion_tab <- tabPanel("Analysis Results",
 #source main panel
 sources_main_panel <- mainPanel(
   h2(HTML("<b>Sources</b>")),
-  p("Our Income Data, sourced from the United States Census Bureau: "),
-  p("https://data.census.gov/table/ACSST5Y2022.S1903?g=050XX00US53033$1400000"),
+  h4("Our Income Data, sourced from the United States Census Bureau:"),
+  a("https://data.census.gov/table/ACSST5Y2022.S1903?g=050XX00US53033$1400000"),
   p("This source offered great insights into the socioecnomic landscape of King County."),
-  p("Our Transit Data, sourced from the United States Census Bureau: "),
-  p("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000"),
+  h4("Our Transit Data, sourced from the United States Census Bureau: "),
+  a("https://data.census.gov/table/ACSST5Y2022.S0802?g=050XX00US53033$1400000"),
   p("This source offered insights on the usage of transportation throughout King County, relating to poverty 
     status and vehicle availability."),
-  p("Our Zip Code Data, Sourced from Proximity One: "),
-  p("https://proximityone.com/ziptractequiv.htm"),
+  h4("Our Zip Code Data, Sourced from Proximity One: "),
+  a("https://proximityone.com/ziptractequiv.htm"),
   p("This source gave us the opportunity to evaluate GEOIDs by zip codes."),
-  h2(HTML("<b>Issues With Our Data: </b>")), 
-  p("Renters and certain demographic groups are often underrepresented in census data collection. 
-    For this reason our data, which aims to understand the relationship between transit usage and 
-    income, may be impacted by the undercounting of those which are likely in the lower financial brackets 
-    such as renters. Additionally, this data also only collects information from King County households, 
-    which may leave out workers that travel from other counties to work in King County.")
 )
 
 
