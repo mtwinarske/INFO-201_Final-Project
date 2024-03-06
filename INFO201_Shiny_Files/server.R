@@ -81,11 +81,11 @@ server <- function(input, output){
   output$map_plot <- renderPlotly({
     plot_data <- NULL
     
-    if (input$chart_type == "Total Household Carpools") {
+    if (input$map_chart_type == "Total Household Carpools") {
       plot_data <- as.numeric(as.character(data[["Estimate.Car.truck.or.van.households.carpooled."]]))
-    } else if (input$chart_type == "Total Transit Trips per Household") {
+    } else if (input$map_chart_type == "Total Transit Trips per Household") {
       plot_data <- as.numeric(as.character(data[["Estimate.Public.Transportation.Users."]]))
-    } else if (input$chart_type == "Median Income by GEOID") {
+    } else if (input$map_chart_type == "Median Income by GEOID") {
       plot_data <- as.numeric(as.character(data[["median_income"]]))
     }
     

@@ -3,7 +3,6 @@ library(shinythemes)
 library(tidycensus)
 library(sf)
 library(tidyverse)
-install.packages(viridis)
 library(ggplot2)
 library(plotly)
 
@@ -83,7 +82,7 @@ viz_1_sidebar <- sidebarPanel(
         by increasing the amount of transit centers, or by increasing the frequency of bus trips,
         we may be able to boost ridership numbers."),
   h3("Map Options:"),
-  selectInput("map_view", "Select Map View:",
+  selectInput("map_chart_type", "Select Map View:",
               choices = c("Total Household Carpools", "Total Transit Trips per Household", "Median Income by GEOID")),
   hr())
 
