@@ -5,7 +5,7 @@ account: mtwinarske
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11420955
-bundleId: 8340769
+bundleId: 8341136
 url: https://mtwinarske.shinyapps.io/Equity-in-Transportation/
 version: 1
 asMultiple: FALSE
