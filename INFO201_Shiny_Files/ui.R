@@ -3,7 +3,7 @@ library(shinythemes)
 library(tidycensus)
 library(sf)
 library(tidyverse)
-library(viridis)
+install.packages(viridis)
 library(ggplot2)
 library(plotly)
 
@@ -106,7 +106,7 @@ viz_1_tab <- tabPanel("Geography & Ridership",
 ######################################################
 
 viz_2_sidebar <- sidebarPanel(
-  h2("Our Question: How Does Poverty Status Vary Across Different Modes of Transportation?"),
+  h2("How Does Poverty Status Vary Across Different Modes of Transportation?"),
   selectInput("chart_type", 
               "Select Mode of Transport",
   choices = c("Car/Truck/Van Driving Alone", "Public Transportation", "Carpool", "Total Poverty Status")),
@@ -132,14 +132,19 @@ viz_2_tab <- tabPanel("Poverty Status Distribution",
 ######################################################
 #################### VIZ-3-Tab #######################
 ######################################################
-
+# viz 3 main panel
+viz_3_main_panel <- mainPanel(
+  h2("Transit Usage & Vehicles Availible in Household"),
+  plotlyOutput("vehicle_plot")
+)
 viz_3_sidebar <- sidebarPanel(
   h2("Chart type selection"),
-  radioButtons("radio",
-               h3("Select Mode of Transport"),
-               choices = list("Car/Truck/Van Driving Alone",
+  radioButtons("vehicle_chart_type",
+               "Select Mode of Transport",
+               choices = c("Car/Truck/Van Driving Alone",
                               "Public Transportation",
                               "Carpool")),
+  
   h3("How is vehicle availability relevant?"),
   p("The United States as a nation is heavily reliant on vehicles for transportation,
   as much of our infrastructure centers around cars. However, this was not always the case,
@@ -154,11 +159,7 @@ viz_3_sidebar <- sidebarPanel(
   affects disadvantaged communities."),
 )
 
-# viz 3 main panel
-viz_3_main_panel <- mainPanel(
-  h2("Transit Usage & Vehicles Availible in Household"),
-  plotlyOutput("vehicle_plot")
-)
+
 
 # layout for viz_3_tab
 viz_3_tab <- tabPanel("Mode availability & Mode Choice",
