@@ -3,7 +3,7 @@ library(sf)
 library(tidyverse)
 
 library(ggplot2)
-library(plot)
+library(plotly)
 
 TransitCenter_df <- read_csv("TransitCenterLocations.csv")
 IncomeTransit_df <- read.csv("IncomeTransitAlt.csv")
@@ -43,7 +43,5 @@ IncomeBracket_map <- ggplot(map_joined_info) +
 plot(TransitUsage_map)
 plot(IncomeBracket_map)
 plot(Carpool_map)
-
-
 
 

@@ -1,9 +1,11 @@
 library(shiny)
 library(shinythemes)
 library(tidycensus)
+library(sf)
 library(tidyverse)
-library(plotly)
+library(viridis)
 library(ggplot2)
+library(plotly)
 
 ######################################################
 ################### Overview-Tab #####################
@@ -82,13 +84,13 @@ viz_1_sidebar <- sidebarPanel(
         we may be able to boost ridership numbers."),
   h3("Map Options:"),
   selectInput("map_view", "Select Map View:",
-              choices = c("Total Household Carpools", "Total Transit Trips per Household", "Average Income by GEOID")),
+              choices = c("Total Household Carpools", "Total Transit Trips per Household", "Median Income by GEOID")),
   hr())
 
 # Main Panel for Viz 1 #
 viz_1_main_panel <- mainPanel(
-  h2("Ridership numbers & Transit Centers in King County, WA", align = "center"),
-  plotlyOutput(outputId = "my_map")
+  h2("Ridership numbers & Transit Centers in King County, WA"),
+  plotlyOutput(outputId = "map_plot")
 )
 
 # Tab label and Format of Viz 1 #
@@ -117,7 +119,7 @@ viz_2_sidebar <- sidebarPanel(
 
 
 viz_2_main_panel <- mainPanel(
-  h2("Economic Background & Transit Ridership in King County, WA", align = "center"),
+  h2("Economic Background & Transit Ridership in King County, WA"),
   plotlyOutput("poverty_plot")
 )
 

@@ -3,17 +3,18 @@ library(shiny)
 library(shinythemes)
 library(tidycensus)
 library(tidyverse)
+library(tidyr)
 library(plotly)
 library(ggplot2)
 library(sf)
+library(dplyr)
 
 server <- function(input, output){
 # Read data now
   data <- read.csv("IncomeTransitAlt.csv", na.strings = c("-", "**"))
   map_data <- st_read("king_county_tracts.geojson")
-  map_joined_info <- left_join(map_data, data, by = "GEOID")
   TransitCenter_df <- read_csv("TransitCenterLocations.csv")
-
+  
 ##########################################################################################################
 ################################# poverty/income-plot ####################################################
 ##########################################################################################################
@@ -79,37 +80,26 @@ server <- function(input, output){
 ################################# mapping-plots ##########################################################
 ##########################################################################################################
   
-################ Total Household Carpools Map
-  output$my_map <- renderPlotly({
-    if (input$map_view == "Total Household Carpools") {
-      
-      my_map <- ggplot(map_joined_info) +
-        geom_sf(aes(fill = Estimate.Car.truck.or.van.households.carpooled.), linetype = 0.5, lwd = 1) +
-        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
-        coord_sf() +
-        scale_fill_gradient(low = "blue", high = "yellow")
-      
-############### Total Transit Trips Map
-      
-    } else if (input$map_view == "Total Transit Trips per Household") {
-      
-      my_map <- ggplot(map_joined_info) +
-        geom_sf(aes(fill = Estimate.Public.Transportation.Users.), linetype = 0.5, lwd = 1) +
-        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
-        coord_sf() +
-        scale_fill_gradient(low = "blue", high = "yellow")
-      
-      
-################ Income Bracket Map
-      
-    } else {
-      my_map <- ggplot(map_joined_info) +
-        geom_sf(aes(fill = median_income), linetype = 0.5, lwd = 1) +
-        geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
-        coord_sf() +
-        scale_fill_gradient(low = "blue", high = "yellow")
+  output$map_plot <- renderPlotly({
+    plot_data <- NULL
+    
+    if (input$chart_type == "Total Household Carpools") {
+      plot_data <- as.numeric(as.character(data[["Estimate.Car.truck.or.van.households.carpooled."]]))
+    } else if (input$chart_type == "Total Transit Trips per Household") {
+      plot_data <- as.numeric(as.character(data[["Estimate.Public.Transportation.Users."]]))
+    } else if (input$chart_type == "Median Income by GEOID") {
+      plot_data <- as.numeric(as.character(data[["median_income"]]))
     }
+    
+    plot_data <- replace_na(plot_data, 0)
+    
+    ggplot_object <- ggplot(map_data) +
+      geom_sf(aes(fill = plot_data), linetype = 0.5, lwd = 1) +
+      geom_point(data = TransitCenter_df, aes(x = Long, y = Lat)) +
+      coord_sf() +
+      scale_fill_gradient(low = "blue", high = "yellow")
+    
+    ggplotly(ggplot_object)
   })
-  
 }
 
