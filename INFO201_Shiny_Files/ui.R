@@ -189,7 +189,7 @@ viz_3_tab <- tabPanel("Mode availability & Mode Choice",
 # Sidebar content
 conclusion_sidebar <- sidebarPanel(
   br(),
-  img(src = "1436294.jpg", height = 308, width = 444),
+  img(src = "1436294.jpg", height = 208, width = 333),
   h6("Image Source:",
      a("https://www.stocksy.com/1436294/seattle-skyline-at-sunset-with-mount-rainier-in-the-background")),
   h3("Method"),
