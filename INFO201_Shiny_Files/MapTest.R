@@ -7,6 +7,8 @@ library(viridis)
 library(ggplot2)
 library(plotly)
 
+map_sf<- st_read("king_county_tracts.geojson")
+
 ui <- fluidPage(
   titlePanel("Interactive Map"),
   selectInput("map_view", "Select Map View:",
