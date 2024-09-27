@@ -1,0 +1,12 @@
+name: KCM-Equity-in-Transportation
+title: KCM-Equity-in-Transportation
+username: mtwinarske
+account: mtwinarske
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11422903
+bundleId: 8341456
+url: https://mtwinarske.shinyapps.io/KCM-Equity-in-Transportation/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
